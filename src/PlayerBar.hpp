@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 class PlayerBar : public sf::Drawable, public sf::Transformable
 {
