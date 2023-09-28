@@ -14,4 +14,6 @@ private:
 
 public:
     Ball();
+
+    sf::FloatRect getBounds() { return ball.getGlobalBounds(); }
 };

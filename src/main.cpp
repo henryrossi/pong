@@ -57,6 +57,15 @@ int main()
             }
         }
 
+        sf::FloatRect ballBoundingBox = ball.getBounds();
+        sf::FloatRect leftBarBoundingBox = leftBar.getBounds();
+        // collision ins't detected
+        if (ballBoundingBox.intersects(leftBarBoundingBox)) {
+            ball.setPosition(640, 320);
+        }
+
+        ball.move(-10, 0);
+
         // sf::Time elapsed = clock.getElapsedTime();
         // std::cout << elapsed.asSeconds() << std::endl;
 

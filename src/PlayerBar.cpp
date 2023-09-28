@@ -17,6 +17,7 @@ void PlayerBar::setAsPlayer(int playerNumber)
         bar.setPosition(1230, 260);
         break;
     default:
+        // Throw error
         std::cout << "Error: Invalid player number: " << playerNumber << std::endl;
         std::cout << "vaild player numbers are 1 or 2" << std::endl;
     }
