@@ -16,6 +16,14 @@ int main()
     leftBar.setAsPlayer(1);
     rightBar.setAsPlayer(2);
     Ball ball;
+    sf::VertexArray centerLine(sf::Quads, 144);
+    for (int i = 0; i < 32; i++)
+    {
+        centerLine[i * 4].position = sf::Vector2f(635, 10 * 2 * i + 5);
+        centerLine[(i * 4) + 1].position = sf::Vector2f(645, 10 * 2 * i + 5);
+        centerLine[(i * 4) + 2].position = sf::Vector2f(645, 10 * (2 * i + 1) + 5);
+        centerLine[(i * 4) + 3].position = sf::Vector2f(635, 10 * (2 * i + 1) + 5);
+    }
 
     sf::Font font;
     if (!font.loadFromFile("./src/bit5x3.ttf"))
@@ -39,16 +47,20 @@ int main()
                 window.close();
                 break;
             case sf::Event::KeyPressed:
-                if (event.key.scancode == sf::Keyboard::Scan::W) {
+                if (event.key.scancode == sf::Keyboard::Scan::W)
+                {
                     leftBar.moveUp();
                 }
-                if (event.key.scancode == sf::Keyboard::Scan::S) {
+                if (event.key.scancode == sf::Keyboard::Scan::S)
+                {
                     leftBar.moveDown();
                 }
-                if (event.key.scancode == sf::Keyboard::Scan::Up) {
+                if (event.key.scancode == sf::Keyboard::Scan::Up)
+                {
                     rightBar.moveUp();
                 }
-                if (event.key.scancode == sf::Keyboard::Scan::Down) {
+                if (event.key.scancode == sf::Keyboard::Scan::Down)
+                {
                     rightBar.moveDown();
                 }
                 break;
@@ -60,7 +72,8 @@ int main()
         sf::FloatRect ballBoundingBox = ball.getBounds();
         sf::FloatRect leftBarBoundingBox = leftBar.getBounds();
         // collision ins't detected
-        if (ballBoundingBox.intersects(leftBarBoundingBox)) {
+        if (ballBoundingBox.intersects(leftBarBoundingBox))
+        {
             ball.setPosition(640, 320);
         }
 
@@ -69,14 +82,13 @@ int main()
         // sf::Time elapsed = clock.getElapsedTime();
         // std::cout << elapsed.asSeconds() << std::endl;
 
-        // can check collisions with boundingBox
-
         window.clear();
         window.draw(leftBar);
         window.draw(rightBar);
         window.draw(ball);
         window.draw(leftScore);
         window.draw(rightScore);
+        window.draw(centerLine);
         window.display();
     }
 
