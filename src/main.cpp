@@ -7,7 +7,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 640), "pong");
+    sf::RenderWindow window(sf::VideoMode(858, 525), "pong");
     window.setFramerateLimit(60);
     sf::Clock clock;
 
@@ -16,13 +16,14 @@ int main()
     leftBar.setAsPlayer(1);
     rightBar.setAsPlayer(2);
     Ball ball;
-    sf::VertexArray centerLine(sf::Quads, 144);
-    for (int i = 0; i < 32; i++)
+    sf::VertexArray centerLine(sf::Quads, 120);
+    // needs to be readjusted
+    for (int i = 0; i < 30; i++)
     {
-        centerLine[i * 4].position = sf::Vector2f(635, 10 * 2 * i + 5);
-        centerLine[(i * 4) + 1].position = sf::Vector2f(645, 10 * 2 * i + 5);
-        centerLine[(i * 4) + 2].position = sf::Vector2f(645, 10 * (2 * i + 1) + 5);
-        centerLine[(i * 4) + 3].position = sf::Vector2f(635, 10 * (2 * i + 1) + 5);
+        centerLine[i * 4].position = sf::Vector2f(425, 10 * 2 * i + 5);
+        centerLine[(i * 4) + 1].position = sf::Vector2f(431, 10 * 2 * i + 5);
+        centerLine[(i * 4) + 2].position = sf::Vector2f(431, 10 * (2 * i + 1) + 5);
+        centerLine[(i * 4) + 3].position = sf::Vector2f(425, 10 * (2 * i + 1) + 5);
     }
 
     sf::Font font;
@@ -33,8 +34,8 @@ int main()
 
     sf::Text leftScore("0", font, 100);
     sf::Text rightScore("0", font, 100);
-    leftScore.setPosition(500, 0);
-    rightScore.setPosition(740, 0);
+    leftScore.setPosition(328, 0);
+    rightScore.setPosition(528, 0);
 
     while (window.isOpen())
     {
@@ -72,12 +73,11 @@ int main()
         sf::FloatRect ballBoundingBox = ball.getBounds();
         sf::FloatRect leftBarBoundingBox = leftBar.getBounds();
         // collision ins't detected
-        if (ballBoundingBox.intersects(leftBarBoundingBox))
+        if (leftBarBoundingBox.intersects(ballBoundingBox))
         {
-            ball.setPosition(640, 320);
+            ball.changeVelocity();
         }
-
-        ball.move(-10, 0);
+        ball.moveBall();
 
         // sf::Time elapsed = clock.getElapsedTime();
         // std::cout << elapsed.asSeconds() << std::endl;

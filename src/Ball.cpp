@@ -3,5 +3,6 @@
 
 Ball::Ball() : ball(sf::Vector2f(10.f, 10.f))
 {
-    ball.setPosition(640, 320);
+    velocity = -1.f;
+    ball.setPosition(400, 265);
 }
