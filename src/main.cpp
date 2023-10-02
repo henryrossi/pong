@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
 #include "PlayerBar.hpp"
 #include "Ball.hpp"
 
@@ -30,8 +31,10 @@ int main()
         return 1;
     }
 
-    sf::Text leftScore("0", font, 100);
-    sf::Text rightScore("0", font, 100);
+    int leftScoreCounter = 0;
+    int rightScoreCounter = 0;
+    sf::Text leftScore(std::to_string(leftScoreCounter), font, 100);
+    sf::Text rightScore(std::to_string(rightScoreCounter), font, 100);
     leftScore.setPosition(328, 0);
     rightScore.setPosition(528, 0);
 
@@ -70,8 +73,16 @@ int main()
         ball.moveBall(leftBar.getGlobalBounds(), rightBar.getGlobalBounds());
 
         sf::Vector2f ballPosiiton = ball.getPosition();
-        if (ballPosiiton.x < 0 || ballPosiiton.x > 848) {
-            std::cout << "Score!" << std::endl;
+        if (ballPosiiton.x < 0) {
+            std::cout << "Score by player 2!" << std::endl;
+            rightScoreCounter += 1;
+            rightScore.setString(std::to_string(rightScoreCounter));
+            ball.reset();
+        }
+        if (ballPosiiton.x > 848) {
+            std::cout << "Score by player 1!" << std::endl;
+            leftScoreCounter += 1;
+            leftScore.setString(std::to_string(leftScoreCounter));
             ball.reset();
         }
 
