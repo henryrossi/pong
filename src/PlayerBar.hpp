@@ -17,7 +17,7 @@ public:
 
     void setAsPlayer(int playerNumber);
 
-    sf::FloatRect getBounds() { return bar.getGlobalBounds(); }
+    sf::FloatRect getGlobalBounds() { return bar.getGlobalBounds(); }
 
     void moveUp();
     void moveDown();

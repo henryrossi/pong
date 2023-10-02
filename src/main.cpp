@@ -67,13 +67,7 @@ int main()
             rightBar.moveDown();
         }
 
-        sf::FloatRect ballBoundingBox = ball.getBounds();
-        sf::FloatRect leftBarBoundingBox = leftBar.getBounds();
-        if (leftBarBoundingBox.intersects(ballBoundingBox))
-        {
-            ball.changeVelocity();
-        }
-        ball.moveBall();
+        ball.moveBall(leftBar.getGlobalBounds(), rightBar.getGlobalBounds());
 
         sf::Vector2f ballPosiiton = ball.getPosition();
         if (ballPosiiton.x < 0 || ballPosiiton.x > 848) {
