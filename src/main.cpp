@@ -75,6 +75,12 @@ int main()
         }
         ball.moveBall();
 
+        sf::Vector2f ballPosiiton = ball.getPosition();
+        if (ballPosiiton.x < 0 || ballPosiiton.x > 848) {
+            std::cout << "Score!" << std::endl;
+            ball.reset();
+        }
+
         // sf::Time elapsed = clock.getElapsedTime();
         // std::cout << elapsed.asSeconds() << std::endl;
 

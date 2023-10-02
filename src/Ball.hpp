@@ -17,7 +17,9 @@ public:
     Ball();
 
     void changeVelocity() { velocity.x *= -1; }
+    sf::Vector2f getPosition() { return ball.getPosition(); }
     void moveBall();
+    void reset() { ball.setPosition(400, 265); }
 
     sf::FloatRect getBounds() { return ball.getGlobalBounds(); }
 };
