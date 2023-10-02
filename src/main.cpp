@@ -3,8 +3,6 @@
 #include "PlayerBar.hpp"
 #include "Ball.hpp"
 
-// We also need center divider and scoreboard
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(858, 525), "pong");
@@ -47,32 +45,30 @@ int main()
             case sf::Event::Closed:
                 window.close();
                 break;
-            case sf::Event::KeyPressed:
-                if (event.key.scancode == sf::Keyboard::Scan::W)
-                {
-                    leftBar.moveUp();
-                }
-                if (event.key.scancode == sf::Keyboard::Scan::S)
-                {
-                    leftBar.moveDown();
-                }
-                if (event.key.scancode == sf::Keyboard::Scan::Up)
-                {
-                    rightBar.moveUp();
-                }
-                if (event.key.scancode == sf::Keyboard::Scan::Down)
-                {
-                    rightBar.moveDown();
-                }
-                break;
             default:
                 break;
             }
         }
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            leftBar.moveUp();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            leftBar.moveDown();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            rightBar.moveUp();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            rightBar.moveDown();
+        }
+
         sf::FloatRect ballBoundingBox = ball.getBounds();
         sf::FloatRect leftBarBoundingBox = leftBar.getBounds();
-        // collision ins't detected
         if (leftBarBoundingBox.intersects(ballBoundingBox))
         {
             ball.changeVelocity();

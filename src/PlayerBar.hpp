@@ -19,6 +19,6 @@ public:
 
     sf::FloatRect getBounds() { return bar.getGlobalBounds(); }
 
-    void moveUp() { bar.move(0, -10); }
-    void moveDown() { bar.move(0, 10); }
+    void moveUp();
+    void moveDown();
 };

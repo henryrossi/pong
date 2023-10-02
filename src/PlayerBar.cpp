@@ -22,3 +22,18 @@ void PlayerBar::setAsPlayer(int playerNumber)
         std::cout << "vaild player numbers are 1 or 2" << std::endl;
     }
 }
+
+void PlayerBar::moveUp() {
+    if (bar.getPosition().y <= 25) {
+        return;
+    }
+    bar.move(0, -10);
+}
+
+void PlayerBar::moveDown() {
+    // Depends on height of the bar and screen size
+    if (bar.getPosition().y >= 450) {
+        return;
+    }
+    bar.move(0, 10);
+}
