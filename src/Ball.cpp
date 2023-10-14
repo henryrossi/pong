@@ -28,18 +28,14 @@ void Ball::moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBo
     if (ballBoundingBox.intersects(leftBoundingBox))
     {
         if (ballBoundingBox.left < leftBoundingBox.left)
-        {
             return;
-        }
         returnBall(leftBoundingBox, ballBoundingBox);
         return;
     }
     if (ballBoundingBox.intersects(rightBoundingBox))
     {
         if (ballBoundingBox.left > rightBoundingBox.left)
-        {
             return;
-        }
         returnBall(rightBoundingBox, ballBoundingBox);
         return;
     }
