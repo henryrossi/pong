@@ -31,7 +31,7 @@ void Ball::moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBo
         {
             return;
         }
-        returnBall(leftBoundingBox, ballBoundingBox, 1);
+        returnBall(leftBoundingBox, ballBoundingBox);
         return;
     }
     if (ballBoundingBox.intersects(rightBoundingBox))
@@ -40,19 +40,24 @@ void Ball::moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBo
         {
             return;
         }
-        returnBall(rightBoundingBox, ballBoundingBox, -1);
+        returnBall(rightBoundingBox, ballBoundingBox);
         return;
     }
 }
 
-void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBox, int xDirection)
+void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBox)
 {
+    int xDirection;
+    if (velocity.x > 0)
+        xDirection = -1;
+    else
+        xDirection = 1;
     float barMidpoint = barBoundingBox.top + barBoundingBox.height / 2;
     float ballMidpoint = ballBoundingBox.top + ballBoundingBox.height / 2;
     float normalizedContactPosition = (barMidpoint - ballMidpoint) / (barBoundingBox.height / 2 + ballBoundingBox.height);
     float maxBounceAngle = 5 * M_PI / 12; // 75 degrees
     float bounceAngle = normalizedContactPosition * maxBounceAngle;
-    float ballSpeed = 10;
+    float ballSpeed = 5;
     velocity.x = ballSpeed * xDirection * cos(bounceAngle);
     velocity.y = ballSpeed * -sin(bounceAngle);
 }
