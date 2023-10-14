@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "Ball.hpp"
-#include <iostream>
 #include <math.h>
 
 Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)), velocity(5.f, 5.f)
@@ -23,29 +22,26 @@ void Ball::moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBo
         velocity.y *= -1;
     }
 
-    // Does this need to be before the move?
-    // Or does the ball's position need to be adjusted like when it's slightly off the screen?
     sf::FloatRect ballBoundingBox = ball.getGlobalBounds();
-    // funky if ball hits top/bottom of bar or bar moves onto ball's position
-    // also need to implement variable return angles
 
     // if ball is more on top of bar than hitting the side of it, don't return the ball
     if (ballBoundingBox.intersects(leftBoundingBox))
     {
-        // Maybe this return statement should be reworked
-        if (ballBoundingBox.left < leftBoundingBox.left + (leftBoundingBox.width) / 2)
+        if (ballBoundingBox.left < leftBoundingBox.left)
         {
             return;
         }
         returnBall(leftBoundingBox, ballBoundingBox, 1);
+        return;
     }
     if (ballBoundingBox.intersects(rightBoundingBox))
     {
-        if (ballBoundingBox.left + ballBoundingBox.width > rightBoundingBox.left + (rightBoundingBox.width) / 2)
+        if (ballBoundingBox.left > rightBoundingBox.left)
         {
             return;
         }
         returnBall(rightBoundingBox, ballBoundingBox, -1);
+        return;
     }
 }
 
@@ -56,7 +52,7 @@ void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBo
     float normalizedContactPosition = (barMidpoint - ballMidpoint) / (barBoundingBox.height / 2 + ballBoundingBox.height);
     float maxBounceAngle = 5 * M_PI / 12; // 75 degrees
     float bounceAngle = normalizedContactPosition * maxBounceAngle;
-    float ballSpeed = 5;
+    float ballSpeed = 10;
     velocity.x = ballSpeed * xDirection * cos(bounceAngle);
     velocity.y = ballSpeed * -sin(bounceAngle);
 }
