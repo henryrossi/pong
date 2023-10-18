@@ -4,6 +4,7 @@ class Ball : public sf::Drawable, public sf::Transformable
 {
 private:
     sf::RectangleShape ball;
+    float ballSpeed;
     sf::Vector2f velocity;
     
 

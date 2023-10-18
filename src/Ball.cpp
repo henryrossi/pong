@@ -8,12 +8,14 @@
 Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)),velocity(5.f, 5.f)
 {
     ball.setPosition(400, 265);
+    ballSpeed = 5.f;
 }
 
 void Ball::reset()
 {
     // sleep a few seconds, maybe do this in the game loop?
     // // random spawn position and random launch angle
+    ballSpeed = 5.f;
     int xDirection;
     if (velocity.x > 0)
         xDirection = 1;
@@ -25,7 +27,6 @@ void Ball::reset()
     int yPosition = heightDistribution(engine);
     float angle = angleDistribution(engine) * M_PI / 12;
     ball.setPosition(410, yPosition);
-    float ballSpeed = 5;
     velocity.x = ballSpeed * xDirection * cos(angle);
     velocity.y = ballSpeed * -sin(angle);
 }
@@ -79,7 +80,7 @@ void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBo
         ball.setPosition(barBoundingBox.left - ballBoundingBox.width, ball.getPosition().y);
     else
         ball.setPosition(barBoundingBox.left + ballBoundingBox.width, ball.getPosition().y);
-    float ballSpeed = 5;
     velocity.x = ballSpeed * xDirection * cos(bounceAngle);
     velocity.y = ballSpeed * -sin(bounceAngle);
+    ballSpeed *= 1.1;
 }
