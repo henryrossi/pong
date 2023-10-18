@@ -7,7 +7,7 @@
 
 #define defaultSpeed 5.f
 
-Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)),velocity(defaultSpeed, defaultSpeed)
+Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)), velocity(defaultSpeed, defaultSpeed)
 {
 
     ball.setPosition(400, 265);

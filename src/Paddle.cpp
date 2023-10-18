@@ -24,15 +24,19 @@ void Paddle::setAsPlayer(int playerNumber)
     }
 }
 
-void Paddle::moveUp() {
-    if (paddle.getPosition().y <= 25) {
+void Paddle::moveUp()
+{
+    if (paddle.getPosition().y <= 25)
+    {
         return;
     }
     paddle.move(0, -10);
 }
 
-void Paddle::moveDown() {
-    if (paddle.getPosition().y >= 450) {
+void Paddle::moveDown()
+{
+    if (paddle.getPosition().y >= 450)
+    {
         return;
     }
     paddle.move(0, 10);

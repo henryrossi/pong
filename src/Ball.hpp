@@ -6,7 +6,6 @@ private:
     sf::RectangleShape ball;
     float ballSpeed;
     sf::Vector2f velocity;
-    
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const
     {

@@ -3,12 +3,12 @@
 #include <string>
 #include "Paddle.hpp"
 #include "Ball.hpp"
+#include "Score.hpp"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(858, 525), "pong");
     window.setFramerateLimit(60);
-    sf::Clock clock;
 
     Paddle leftBar(1);
     Paddle rightBar(2);
@@ -27,13 +27,8 @@ int main()
     sf::Font font;
     if (!font.loadFromFile("./src/bit5x3.ttf"))
         return 1;
-
-    int leftScoreCounter = 0;
-    int rightScoreCounter = 0;
-    sf::Text leftScore(std::to_string(leftScoreCounter), font, 100);
-    sf::Text rightScore(std::to_string(rightScoreCounter), font, 100);
-    leftScore.setPosition(328, 0);
-    rightScore.setPosition(528, 0);
+    Score leftScore(font, 1);
+    Score rightScore(font, 2);
 
     // Game Loop
     while (window.isOpen())
@@ -65,19 +60,14 @@ int main()
         sf::Vector2f ballPosiiton = ball.getPosition();
         if (ballPosiiton.x < 0)
         {
-            rightScoreCounter += 1;
-            rightScore.setString(std::to_string(rightScoreCounter));
+            rightScore.increaseScore();
             ball.reset();
         }
         if (ballPosiiton.x > 848)
         {
-            leftScoreCounter += 1;
-            leftScore.setString(std::to_string(leftScoreCounter));
+            leftScore.increaseScore();
             ball.reset();
         }
-
-        // sf::Time elapsed = clock.getElapsedTime();
-        // std::cout << elapsed.asSeconds() << std::endl;
 
         window.clear();
         window.draw(leftBar);
