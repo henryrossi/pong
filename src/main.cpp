@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
-#include "PlayerBar.hpp"
+#include "Paddle.hpp"
 #include "Ball.hpp"
 
 int main()
@@ -10,11 +10,8 @@ int main()
     window.setFramerateLimit(60);
     sf::Clock clock;
 
-    PlayerBar leftBar;
-    PlayerBar rightBar;
-    // can do this in constructor?
-    leftBar.setAsPlayer(1);
-    rightBar.setAsPlayer(2);
+    Paddle leftBar(1);
+    Paddle rightBar(2);
 
     Ball ball;
     sf::VertexArray centerLine(sf::Quads, 120);
@@ -38,6 +35,7 @@ int main()
     leftScore.setPosition(328, 0);
     rightScore.setPosition(528, 0);
 
+    // Game Loop
     while (window.isOpen())
     {
         sf::Event event;

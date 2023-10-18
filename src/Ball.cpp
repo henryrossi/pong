@@ -9,6 +9,7 @@
 
 Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)),velocity(defaultSpeed, defaultSpeed)
 {
+
     ball.setPosition(400, 265);
     ballSpeed = defaultSpeed;
 }
@@ -16,7 +17,6 @@ Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)),velocity(defaultSpeed, defaultSpee
 void Ball::reset()
 {
     // sleep a few seconds, maybe do this in the game loop?
-    // // random spawn position and random launch angle
     ballSpeed = defaultSpeed;
     int xDirection;
     if (velocity.x > 0)
@@ -65,23 +65,23 @@ void Ball::moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBo
     }
 }
 
-void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBox)
+void Ball::returnBall(sf::FloatRect paddleBoundingBox, sf::FloatRect ballBoundingBox)
 {
     int xDirection;
     if (velocity.x > 0)
         xDirection = -1;
     else
         xDirection = 1;
-    float barMidpoint = barBoundingBox.top + barBoundingBox.height / 2;
+    float paddleMidpoint = paddleBoundingBox.top + paddleBoundingBox.height / 2;
     float ballMidpoint = ballBoundingBox.top + ballBoundingBox.height / 2;
-    float normalizedContactPosition = (barMidpoint - ballMidpoint) / (barBoundingBox.height / 2 + ballBoundingBox.height);
+    float normalizedContactPosition = (paddleMidpoint - ballMidpoint) / (paddleBoundingBox.height / 2 + ballBoundingBox.height);
     float maxBounceAngle = 4 * M_PI / 12; // 75 degrees
     float bounceAngle = normalizedContactPosition * maxBounceAngle;
     // move the ball to the front of the paddle to avoid double collision
     if (velocity.x > 0)
-        ball.setPosition(barBoundingBox.left - ballBoundingBox.width, ball.getPosition().y);
+        ball.setPosition(paddleBoundingBox.left - ballBoundingBox.width, ball.getPosition().y);
     else
-        ball.setPosition(barBoundingBox.left + ballBoundingBox.width, ball.getPosition().y);
+        ball.setPosition(paddleBoundingBox.left + ballBoundingBox.width, ball.getPosition().y);
     velocity.x = ballSpeed * xDirection * cos(bounceAngle);
     velocity.y = ballSpeed * -sin(bounceAngle);
     ballSpeed *= 1.1;

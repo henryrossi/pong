@@ -15,7 +15,7 @@ private:
         target.draw(ball, states);
     }
 
-    void returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBox);
+    void returnBall(sf::FloatRect paddleBoundingBox, sf::FloatRect ballBoundingBox);
 
 public:
     Ball();
