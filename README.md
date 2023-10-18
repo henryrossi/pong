@@ -1,4 +1,4 @@
-# pong made in c++ with SFML
+# The classic game pong made in C++ with SFML
 
 
 
