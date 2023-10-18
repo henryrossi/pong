@@ -15,9 +15,7 @@ private:
 public:
     Paddle(int playerNumber);
     void setAsPlayer(int playerNumber);
-
-    sf::FloatRect getGlobalBounds() { return paddle.getGlobalBounds(); }
-
     void moveUp();
     void moveDown();
+    sf::FloatRect getGlobalBounds() { return paddle.getGlobalBounds(); }
 };

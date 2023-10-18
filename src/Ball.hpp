@@ -20,5 +20,6 @@ public:
     Ball();
     void reset();
     void moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBox);
+    int getXDirection();
     sf::Vector2f getPosition() { return ball.getPosition(); }
 };

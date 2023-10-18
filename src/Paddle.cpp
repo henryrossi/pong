@@ -18,7 +18,6 @@ void Paddle::setAsPlayer(int playerNumber)
         paddle.setPosition(808, 260);
         break;
     default:
-        // Throw error
         std::cout << "Error: Invalid player number: " << playerNumber << std::endl;
         std::cout << "vaild player numbers are 1 or 2" << std::endl;
     }
@@ -26,18 +25,16 @@ void Paddle::setAsPlayer(int playerNumber)
 
 void Paddle::moveUp()
 {
+    // Prevent paddle from moving to the very top of the screen
     if (paddle.getPosition().y <= 25)
-    {
         return;
-    }
     paddle.move(0, -10);
 }
 
 void Paddle::moveDown()
 {
+    // Prevent paddle from moving to the very bottom of the screen
     if (paddle.getPosition().y >= 450)
-    {
         return;
-    }
     paddle.move(0, 10);
 }

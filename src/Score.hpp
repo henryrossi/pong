@@ -16,4 +16,5 @@ private:
 public:
     Score(sf::Font &font, int playerNumber);
     void increaseScore();
+    int getScore() { return count; }
 };
