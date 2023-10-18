@@ -75,6 +75,10 @@ void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBo
     float maxBounceAngle = 5 * M_PI / 12; // 75 degrees
     float bounceAngle = normalizedContactPosition * maxBounceAngle;
     // move the ball to the front of the paddle to avoid double collision
+    if (velocity.x > 0)
+        ball.setPosition(barBoundingBox.left - ballBoundingBox.width, ball.getPosition().y);
+    else
+        ball.setPosition(barBoundingBox.left + ballBoundingBox.width, ball.getPosition().y);
     float ballSpeed = 5;
     velocity.x = ballSpeed * xDirection * cos(bounceAngle);
     velocity.y = ballSpeed * -sin(bounceAngle);
