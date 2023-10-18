@@ -5,17 +5,19 @@
 #include <chrono>
 #include <functional>
 
-Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)),velocity(5.f, 5.f)
+#define defaultSpeed 5.f
+
+Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)),velocity(defaultSpeed, defaultSpeed)
 {
     ball.setPosition(400, 265);
-    ballSpeed = 5.f;
+    ballSpeed = defaultSpeed;
 }
 
 void Ball::reset()
 {
     // sleep a few seconds, maybe do this in the game loop?
     // // random spawn position and random launch angle
-    ballSpeed = 5.f;
+    ballSpeed = defaultSpeed;
     int xDirection;
     if (velocity.x > 0)
         xDirection = 1;
@@ -23,7 +25,7 @@ void Ball::reset()
         xDirection = -1;
     std::default_random_engine engine(std::chrono::system_clock::now().time_since_epoch().count());
     std::uniform_int_distribution<int> heightDistribution(25, 500);
-    std::uniform_int_distribution<int> angleDistribution(-5, 5); // 1/12 of a radian
+    std::uniform_int_distribution<int> angleDistribution(-4, 4); // 1/12 of a radian
     int yPosition = heightDistribution(engine);
     float angle = angleDistribution(engine) * M_PI / 12;
     ball.setPosition(410, yPosition);
@@ -73,7 +75,7 @@ void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBo
     float barMidpoint = barBoundingBox.top + barBoundingBox.height / 2;
     float ballMidpoint = ballBoundingBox.top + ballBoundingBox.height / 2;
     float normalizedContactPosition = (barMidpoint - ballMidpoint) / (barBoundingBox.height / 2 + ballBoundingBox.height);
-    float maxBounceAngle = 5 * M_PI / 12; // 75 degrees
+    float maxBounceAngle = 4 * M_PI / 12; // 75 degrees
     float bounceAngle = normalizedContactPosition * maxBounceAngle;
     // move the ball to the front of the paddle to avoid double collision
     if (velocity.x > 0)
