@@ -1,4 +1,4 @@
-# pong
+# pong made in c++ with SFML
 
 
 
