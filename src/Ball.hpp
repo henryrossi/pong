@@ -5,7 +5,7 @@ class Ball : public sf::Drawable, public sf::Transformable
 private:
     sf::RectangleShape ball;
     sf::Vector2f velocity;
-    // int hitCounter;
+    
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const
     {
@@ -18,7 +18,7 @@ private:
 
 public:
     Ball();
+    void reset();
     void moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBox);
     sf::Vector2f getPosition() { return ball.getPosition(); }
-    void reset() { ball.setPosition(400, 265); }
 };

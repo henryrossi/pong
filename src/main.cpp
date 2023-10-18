@@ -12,8 +12,10 @@ int main()
 
     PlayerBar leftBar;
     PlayerBar rightBar;
+    // can do this in constructor?
     leftBar.setAsPlayer(1);
     rightBar.setAsPlayer(2);
+
     Ball ball;
     sf::VertexArray centerLine(sf::Quads, 120);
     // needs to be readjusted
@@ -27,9 +29,7 @@ int main()
 
     sf::Font font;
     if (!font.loadFromFile("./src/bit5x3.ttf"))
-    {
         return 1;
-    }
 
     int leftScoreCounter = 0;
     int rightScoreCounter = 0;
@@ -54,31 +54,25 @@ int main()
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        {
             leftBar.moveUp();
-        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        {
             leftBar.moveDown();
-        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
             rightBar.moveUp();
-        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
             rightBar.moveDown();
-        }
 
         ball.moveBall(leftBar.getGlobalBounds(), rightBar.getGlobalBounds());
 
         sf::Vector2f ballPosiiton = ball.getPosition();
-        if (ballPosiiton.x < 0) {
+        if (ballPosiiton.x < 0)
+        {
             rightScoreCounter += 1;
             rightScore.setString(std::to_string(rightScoreCounter));
             ball.reset();
         }
-        if (ballPosiiton.x > 848) {
+        if (ballPosiiton.x > 848)
+        {
             leftScoreCounter += 1;
             leftScore.setString(std::to_string(leftScoreCounter));
             ball.reset();

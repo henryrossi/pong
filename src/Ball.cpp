@@ -1,10 +1,33 @@
 #include <SFML/Graphics.hpp>
 #include "Ball.hpp"
 #include <math.h>
+#include <random>
+#include <chrono>
+#include <functional>
 
-Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)), velocity(5.f, 5.f)
+Ball::Ball() : ball(sf::Vector2f(10.f, 10.f)),velocity(5.f, 5.f)
 {
     ball.setPosition(400, 265);
+}
+
+void Ball::reset()
+{
+    // sleep a few seconds, maybe do this in the game loop?
+    // // random spawn position and random launch angle
+    int xDirection;
+    if (velocity.x > 0)
+        xDirection = 1;
+    else
+        xDirection = -1;
+    std::default_random_engine engine(std::chrono::system_clock::now().time_since_epoch().count());
+    std::uniform_int_distribution<int> heightDistribution(25, 500);
+    std::uniform_int_distribution<int> angleDistribution(-5, 5); // 1/12 of a radian
+    int yPosition = heightDistribution(engine);
+    float angle = angleDistribution(engine) * M_PI / 12;
+    ball.setPosition(410, yPosition);
+    float ballSpeed = 5;
+    velocity.x = ballSpeed * xDirection * cos(angle);
+    velocity.y = ballSpeed * -sin(angle);
 }
 
 void Ball::moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBox)
@@ -23,8 +46,6 @@ void Ball::moveBall(sf::FloatRect leftBoundingBox, sf::FloatRect rightBoundingBo
     }
 
     sf::FloatRect ballBoundingBox = ball.getGlobalBounds();
-
-    // if ball is more on top of bar than hitting the side of it, don't return the ball
     if (ballBoundingBox.intersects(leftBoundingBox))
     {
         if (ballBoundingBox.left < leftBoundingBox.left)
@@ -53,6 +74,7 @@ void Ball::returnBall(sf::FloatRect barBoundingBox, sf::FloatRect ballBoundingBo
     float normalizedContactPosition = (barMidpoint - ballMidpoint) / (barBoundingBox.height / 2 + ballBoundingBox.height);
     float maxBounceAngle = 5 * M_PI / 12; // 75 degrees
     float bounceAngle = normalizedContactPosition * maxBounceAngle;
+    // move the ball to the front of the paddle to avoid double collision
     float ballSpeed = 5;
     velocity.x = ballSpeed * xDirection * cos(bounceAngle);
     velocity.y = ballSpeed * -sin(bounceAngle);
